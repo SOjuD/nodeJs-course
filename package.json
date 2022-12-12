@@ -1,0 +1,32 @@
+{
+  "name": "nodejs-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start_task_1.1": "nodemon --exec npm run babel-node --  ./src/task1.1/index.js",
+    "start_task_1.2": "nodemon --ignore 'files/' --exec npm run babel-node -- ./src/task1.2/index.js",
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SOjuD/nodeJs-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SOjuD/nodeJs-course/issues"
+  },
+  "homepage": "https://github.com/SOjuD/nodeJs-course#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
+}
