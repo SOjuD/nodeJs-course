@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start_task_1.1": "nodemon --exec npm run babel-node --  ./src/task1.1/index.js",
-    "start_task_1.2": "nodemon --ignore 'files/' --exec npm run babel-node -- ./src/task1.2/index.js",
-    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "start": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,12 +19,19 @@
   },
   "homepage": "https://github.com/SOjuD/nodeJs-course#readme",
   "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/node": "^7.20.5",
-    "@babel/preset-env": "^7.20.2",
-    "nodemon": "^2.0.20"
+    "@types/express": "^4.17.15",
+    "@types/uuid": "^9.0.0",
+    "eslint": "^8.31.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   },
   "dependencies": {
-    "csvtojson": "^2.0.10"
+    "@types/node": "^18.11.18",
+    "express": "^4.18.2",
+    "express-joi-validation": "^5.0.1",
+    "joi": "^17.7.0",
+    "joi-extract-type": "^15.0.8",
+    "uuid": "^9.0.0"
   }
 }
