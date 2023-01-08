@@ -15,11 +15,8 @@ export interface IEditUser extends IBaseUser {
     id: string;
 }
 
-export interface IUserId {
+export interface IGetUser {
     id: string;
-}
-
-export interface IUserLogin {
     login: string;
     limit: number;
 }

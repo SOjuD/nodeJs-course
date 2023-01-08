@@ -1,5 +1,5 @@
-import { IBaseUser, IEditUser, IUser } from "./index.types";
-import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { validate as uuidValidate, v4 as uuidv4 } from 'uuid';
+import { IBaseUser, IEditUser, IUser } from "./user.types";
 
 const users: IUser[] = [];
 
@@ -32,13 +32,33 @@ export const editUser = (userData: IEditUser): IEditUser | void => {
     return users[userIndex];
 }
 
+enum UserErrors {
+    InvalidIdFormat,
+    UserIdDoesNotExist,
+    UserLoginDoesNotExist,
+    UserRemoved,
+}
+
+const throwUserError = (type: UserErrors, param?: string): void => {
+    switch (type) {
+        case UserErrors.InvalidIdFormat:
+            throw new Error("invalid id format");
+        case UserErrors.UserIdDoesNotExist:
+            throw new Error(`user with id ${param} doesn't exist`);
+        case UserErrors.UserRemoved:
+            throw new Error(`user with id ${param} exists but removed`);
+        case UserErrors.UserLoginDoesNotExist:
+            throw new Error(`user with login ${param} doesn't exist`)
+    }
+}
+
 export const getUserById = (id: string): IUser | void => {
-    if (!uuidValidate(id)) throw new Error("invalid id format");
+    if (!uuidValidate(id)) throwUserError(UserErrors.InvalidIdFormat);
 
     const user = users.find(dbUser => dbUser.id === id);
 
-    if (!user) throw new Error(`user with id ${id} doesn't exist`);
-    if (user?.isDeleted) throw new Error(`user with id ${id} exists but removed`);
+    if (!user) throwUserError(UserErrors.UserIdDoesNotExist, id);
+    if (user?.isDeleted) throwUserError(UserErrors.UserRemoved, id);
 
     return user;
 }
@@ -46,7 +66,7 @@ export const getUserById = (id: string): IUser | void => {
 export const getUsersByLogin = (loginSubstring: string, limit: number = 10): IUser[] | void => {
     const matches = users.filter(user => user.login.includes(loginSubstring));
 
-    if (!matches.length) throw new Error(`user with login ${loginSubstring} doesn't exist`);
+    if (!matches.length) throwUserError(UserErrors.UserLoginDoesNotExist, loginSubstring);
 
     return matches.sort((a, b) => a.login.localeCompare(b.login)).slice(0, limit < matches.length ? matches.length : limit - 1);
 }
@@ -56,7 +76,7 @@ export const removeUser = (id: string): string | void => {
 
     const userIndex = users.findIndex(dbUser => dbUser.id === id);
 
-    if (userIndex < 0) throw new Error(`user with id ${id} doesn't exist`);
+    if (userIndex < 0) throwUserError(UserErrors.UserIdDoesNotExist, id);
 
     users[userIndex].isDeleted = true;
     return `user ${id} was successfuly removed`;

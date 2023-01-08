@@ -1,7 +1,7 @@
 
 import Joi from 'joi'
 import joiValidation from 'express-joi-validation'
-import { IBaseUser, IEditUser, IUserId, IUserLogin } from "./index.types";
+import { IBaseUser, IEditUser, IGetUser } from "./user.types";
 
 export const validator = joiValidation.createValidator();
 
@@ -27,19 +27,13 @@ export interface IEditUserSchema extends joiValidation.ValidatedRequestSchema {
 }
 
 export const getUserScheme = Joi.object({
-    id: Joi.string().required()
-})
-
-export const getUserByLoginScheme = Joi.object({
-    login: Joi.string().required(),
+    id: Joi.string(),
+    login: Joi.string(),
     limit: Joi.number()
 })
 
 export interface IGetUserSchema extends joiValidation.ValidatedRequestSchema {
-    [joiValidation.ContainerTypes.Query]: IUserId
+    [joiValidation.ContainerTypes.Query]: IGetUser
 }
 
-export interface IGetUserByLoginSchema extends joiValidation.ValidatedRequestSchema {
-    [joiValidation.ContainerTypes.Query]: IUserLogin
-}
 
