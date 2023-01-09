@@ -1,0 +1,37 @@
+{
+  "name": "nodejs-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SOjuD/nodeJs-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SOjuD/nodeJs-course/issues"
+  },
+  "homepage": "https://github.com/SOjuD/nodeJs-course#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/uuid": "^9.0.0",
+    "eslint": "^8.31.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.18",
+    "express": "^4.18.2",
+    "express-joi-validation": "^5.0.1",
+    "joi": "^17.7.0",
+    "joi-extract-type": "^15.0.8",
+    "uuid": "^9.0.0"
+  }
+}

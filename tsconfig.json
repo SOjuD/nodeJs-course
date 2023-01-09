@@ -1,0 +1,19 @@
+{
+	"files": [
+		"src/index.ts"
+	],
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": true,
+		"useUnknownInCatchVariables": false,
+		"allowSyntheticDefaultImports": true,
+		"noEmit": false,
+	}
+}
