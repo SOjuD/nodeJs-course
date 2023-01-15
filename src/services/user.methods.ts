@@ -70,7 +70,8 @@ export const getUsersByLogin = async (loginSubstring: string, limit: number = 10
                 [Op.substring]: loginSubstring
             }
         },
-        raw: true
+        raw: true,
+        limit: limit
     }) as unknown as IUser[];
 
     if (!matches.length) throwUserError(UserErrors.UserLoginDoesNotExist, loginSubstring);
