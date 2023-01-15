@@ -1,7 +1,7 @@
 
-import Joi from 'joi'
-import joiValidation from 'express-joi-validation'
-import { IBaseUser, IEditUser, IGetUser } from "./user.types";
+import joiValidation from 'express-joi-validation';
+import Joi from 'joi';
+import { IBaseUser, IGetUser, IUser } from '../interfaces/user.types';
 
 export const validator = joiValidation.createValidator();
 
@@ -11,26 +11,27 @@ export const createUserSchema = Joi.object({
     age: Joi.number().required().min(4).max(130)
 })
 
-export interface ICreateUserSchema extends joiValidation.ValidatedRequestSchema {
-    [joiValidation.ContainerTypes.Body]: IBaseUser
-}
-
 export const editUserSchema = Joi.object({
     login: Joi.string(),
     password: Joi.string().regex(/[0-9][a-z]/),
     age: Joi.number().min(4).max(130),
-    id: Joi.string().required()
+    id: Joi.number().required()
 })
 
-export interface IEditUserSchema extends joiValidation.ValidatedRequestSchema {
-    [joiValidation.ContainerTypes.Body]: IEditUser
-}
-
 export const getUserScheme = Joi.object({
-    id: Joi.string(),
+    id: Joi.number(),
     login: Joi.string(),
     limit: Joi.number()
 })
+
+
+export interface ICreateUserSchema extends joiValidation.ValidatedRequestSchema {
+    [joiValidation.ContainerTypes.Body]: IBaseUser
+}
+
+export interface IUserSchema extends joiValidation.ValidatedRequestSchema {
+    [joiValidation.ContainerTypes.Body]: IUser
+}
 
 export interface IGetUserSchema extends joiValidation.ValidatedRequestSchema {
     [joiValidation.ContainerTypes.Query]: IGetUser
