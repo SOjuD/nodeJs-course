@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { startApp } from './services/user.methods';
+import { startApp } from './services/user.services';
 
 const port = process.env.PORT || 3000;
 
@@ -13,5 +13,5 @@ startApp(router);
 
 
 app.listen(port, () => {
-    console.log(`App running on http://localhost:${port}`)
+	console.log(`App running on http://localhost:${port}`)
 })
